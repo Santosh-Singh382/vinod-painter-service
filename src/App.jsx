@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
-  ArrowDownRight, ArrowRight, Brush, Check, ChevronDown, Clock3, Instagram,
+  ArrowDownRight, ArrowLeft, ArrowRight, ArrowUp, ArrowUpRight, Check, ChevronDown,
   MapPin, Menu, PaintBucket, Paintbrush, Palette, Phone, Send, Sparkles, X,
-  MessageCircle, Star, ShieldCheck, House, Palette as PaletteIcon
+  MessageCircle, ShieldCheck, House, Palette as PaletteIcon
 } from 'lucide-react';
 
 const whatsappValue = import.meta.env.VITE_WHATSAPP_NUMBER || '';
@@ -441,14 +441,14 @@ const dictionary = {
     aboutButton: 'अपने काम के बारे में बात करें',
     lets: 'आइए, काम शुरू करें', ready: 'घर को दें', freshCoat: 'नया रंग-रूप।',
     contactIntro: 'अपने काम के बारे में थोड़ी जानकारी दें। हम आपसे संपर्क करके ज़रूरत और काम के बारे में बात करेंगे।',
-    serviceArea: 'हमारा सेवा क्षेत्र', quick: 'जल्दी संपर्क करें', whatsappQuote: 'कोटेशन के लिए WhatsApp करें', callUs: 'फ़ोन करें',
+    serviceArea: 'हमारा सेवा क्षेत्र', quick: 'जल्दी संपर्क करें', whatsappQuote: 'कोटेशन के लिए WhatsApp पर संपर्क करें', callUs: 'फ़ोन करें',
     formTitle: 'अपने काम के बारे में बताएँ', required: '* वाले विकल्प भरना ज़रूरी है।',
     name: 'आपका नाम *', namePlaceholder: 'अपना नाम लिखें', phone: 'मोबाइल नंबर *', phonePlaceholder: 'अपना संपर्क नंबर लिखें',
     need: 'कौन सा काम करवाना है?', projectDetails: 'काम की जानकारी', detailPlaceholder: 'एक कमरा, पूरा घर, दीवार का डिज़ाइन… (ज़रूरी नहीं)',
     send: 'WhatsApp पर पूछताछ भेजें', prepare: 'पूछताछ तैयार करें',
     privacy: 'आपकी जानकारी का उपयोग केवल आपकी पूछताछ का जवाब देने के लिए होगा।',
     footerDesc: 'घरों में भरें खूबसूरत रंग', footerDesc2: 'और आपके आइडिया को दें नया रूप।',
-    top: 'ऊपर जाएँ', rights: 'सर्वाधिकार सुरक्षित।', chat: 'WhatsApp करें',
+    top: 'ऊपर जाएँ', rights: 'सर्वाधिकार सुरक्षित।', chat: 'WhatsApp पर संपर्क करें',
     successLive: 'WhatsApp में आपकी पूछताछ खुलनी चाहिए। भेजने के लिए WhatsApp में Send दबाएँ।',
     successSetup: 'आपकी जानकारी तैयार है। सीधे WhatsApp पर भेजने के लिए .env फ़ाइल में सही नंबर डालें।',
     defaultMessage: 'नमस्ते Vinod Painter Service, मुझे पेंटिंग के काम का अनुमान चाहिए।'
@@ -642,9 +642,9 @@ function App() {
             <div className="projects-grid">
               {projects.map((project, i) => <article className={`project-card project-${i + 1} reveal reveal-stagger`} key={project.title}>
                 <button type="button" className="project-image tilt-card" ref={selectedProject === i ? lightboxTriggerRef : null} onClick={() => setSelectedProject(i)} aria-label={language === 'hi' ? `${t.projectTitles[i]} की बड़ी तस्वीर देखें` : `View larger image of ${t.projectTitles[i]}`}>
-                  <img src={unsplashImage(project.image)} srcSet={unsplashSrcSet(project.image)} sizes="(max-width: 760px) calc(100vw - 36px), (max-width: 1200px) 31vw, 480px" width="900" height="600" alt={t.projectTitles[i]} loading="lazy" decoding="async" /><span className="project-index">0{i + 1}</span><span className="project-view">View image <ArrowUpRightIcon /></span>
+                  <img src={unsplashImage(project.image)} srcSet={unsplashSrcSet(project.image)} sizes="(max-width: 760px) calc(100vw - 36px), (max-width: 1200px) 31vw, 480px" width="900" height="600" alt={t.projectTitles[i]} loading="lazy" decoding="async" /><span className="project-index">0{i + 1}</span><span className="project-view">{language === 'hi' ? 'देखें / जानें' : 'VIEW / EXPLORE'} <ArrowUpRight size={19} aria-hidden="true" /></span>
                 </button>
-                <div className="project-info"><div><small>{t.projectCats[i]}</small><h3>{t.projectTitles[i]}</h3><p>{t.projectDescs[i]}</p></div><a href="#contact" aria-label={language === "hi" ? `${t.projectTitles[i]} के बारे में पूछें` : `Ask about ${t.projectTitles[i]}`}><ArrowUpRightIcon /></a></div>
+                <div className="project-info"><div><small>{t.projectCats[i]}</small><h3>{t.projectTitles[i]}</h3><p>{t.projectDescs[i]}</p></div><a href="#contact" aria-label={language === "hi" ? `${t.projectTitles[i]} के बारे में पूछें` : `Ask about ${t.projectTitles[i]}`}><ArrowUpRight size={19} aria-hidden="true" /></a></div>
               </article>)}
             </div>
             <p className="gallery-note">{t.galleryNote}</p>
@@ -719,15 +719,15 @@ function App() {
         <div className="container footer-main">
           <a className="brand footer-brand" href="#home"><span className="brand-mark"><Paintbrush size={24} /></span><span className="brand-copy"><strong>VINOD <em>PAINTER</em></strong><small>SERVICE · KISHANGANJ</small></span></a>
           <p>{t.footerDesc}<br />{t.footerDesc2}</p>
-          <a className="footer-top" href="#home">{t.top} <ArrowRight size={16} /></a>
+          <a className="footer-top" href="#home">{t.top} <ArrowUp size={16} aria-hidden="true" /></a>
         </div>
         <div className="container footer-bottom"><span>© {new Date().getFullYear()} Vinod Painter Service. {t.rights}</span><span>Barira · Terhagachh · Kishanganj, Bihar</span></div>
       </footer>
-      <a className="floating-whatsapp" href={waLink(t.defaultMessage)} target={whatsappNumber && whatsappNumber !== '91XXXXXXXXXX' ? '_blank' : undefined} rel="noreferrer" aria-label={language === "hi" ? "WhatsApp पर संपर्क करें" : "Contact Vinod Painter Service on WhatsApp"}><MessageCircle size={23} /><span>{t.chat}</span></a>
+      <a className="floating-whatsapp" href={waLink(t.defaultMessage)} target={whatsappNumber && whatsappNumber !== '91XXXXXXXXXX' ? '_blank' : undefined} rel="noreferrer" aria-label={language === "hi" ? "WhatsApp पर संपर्क करें" : "Contact Vinod Painter Service on WhatsApp"}><MessageCircle size={20} aria-hidden="true" /></a>
       {selectedProject !== null && <div className="lightbox" ref={lightboxRef} role="dialog" aria-modal="true" aria-label={t.projectTitles[selectedProject]} onClick={() => setSelectedProject(null)}>
         <button type="button" className="lightbox-close" onClick={() => setSelectedProject(null)} aria-label={language === 'hi' ? 'बंद करें' : 'Close image'}><X size={22} /></button>
-        <button type="button" className="lightbox-control lightbox-previous" onClick={(event) => { event.stopPropagation(); showPreviousProject(); }} aria-label={language === 'hi' ? 'पिछली तस्वीर' : 'Previous image'}><ArrowRight size={22} /></button>
-        <button type="button" className="lightbox-control lightbox-next" onClick={(event) => { event.stopPropagation(); showNextProject(); }} aria-label={language === 'hi' ? 'अगली तस्वीर' : 'Next image'}><ArrowRight size={22} /></button>
+        <button type="button" className="lightbox-control lightbox-previous" onClick={(event) => { event.stopPropagation(); showPreviousProject(); }} aria-label={language === 'hi' ? 'पिछली तस्वीर' : 'Previous image'}><ArrowLeft size={22} aria-hidden="true" /></button>
+        <button type="button" className="lightbox-control lightbox-next" onClick={(event) => { event.stopPropagation(); showNextProject(); }} aria-label={language === 'hi' ? 'अगली तस्वीर' : 'Next image'}><ArrowRight size={22} aria-hidden="true" /></button>
         <div className="lightbox-panel" onClick={(event) => event.stopPropagation()}>
           <img src={unsplashImage(projects[selectedProject].image, 1600)} srcSet={unsplashSrcSet(projects[selectedProject].image, [900, 1200, 1600, 2000])} sizes="(max-width: 900px) calc(100vw - 36px), 860px" width="1600" height="1067" alt={t.projectTitles[selectedProject]} />
           <div className="lightbox-caption"><small>{t.projectCats[selectedProject]}</small><strong>{t.projectTitles[selectedProject]}</strong><span>{t.projectDescs[selectedProject]}</span></div>
@@ -735,10 +735,6 @@ function App() {
       </div>}
     </div>
   );
-}
-
-function ArrowUpRightIcon() {
-  return <ArrowRight size={19} />;
 }
 
 export default App;
