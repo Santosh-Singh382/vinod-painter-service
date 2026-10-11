@@ -1,4 +1,4 @@
-const CACHE_NAME = 'vinod-painter-shell-v1';
+const CACHE_NAME = 'vinod-painter-shell-v2';
 const APP_SHELL = ['/', '/index.html', '/favicon.svg', '/pwa-icon.svg', '/manifest.webmanifest'];
 
 self.addEventListener('install', (event) => {

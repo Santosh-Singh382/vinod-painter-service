@@ -7,6 +7,7 @@ import {
 
 const whatsappValue = import.meta.env.VITE_WHATSAPP_NUMBER || '';
 const whatsappNumber = whatsappValue && whatsappValue !== '91XXXXXXXXXX' ? whatsappValue.replace(/\D/g, '') : '';
+const hasWhatsAppNumber = /^\d{10,15}$/.test(whatsappNumber);
 const phoneNumber = import.meta.env.VITE_PHONE_NUMBER || '';
 const email = import.meta.env.VITE_EMAIL || '';
 
@@ -32,12 +33,19 @@ function unsplashSrcSet(id, widths = [480, 768, 1200, 1600]) {
 }
 
 function waLink(message = 'Namaste Vinod Painter Service, mujhe painting ke liye quotation chahiye.') {
-  if (!whatsappNumber || whatsappNumber === '91XXXXXXXXXX') return '#contact';
+  if (!hasWhatsAppNumber) return '#contact';
   return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
 
 function WhatsAppButton({ children = 'Get a free estimate', className = '', message }) {
-  return <a className={`button button-primary magnetic-target ${className}`} href={waLink(message)} target={whatsappNumber && whatsappNumber !== '91XXXXXXXXXX' ? '_blank' : undefined} rel="noreferrer">
+  const handleClick = (event) => {
+    if (hasWhatsAppNumber) return;
+    event.preventDefault();
+    window.alert('WhatsApp number is not configured yet. Please use the enquiry form below.');
+    document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return <a className={`button button-primary magnetic-target ${className}`} href={waLink(message)} target={hasWhatsAppNumber ? '_blank' : undefined} rel="noreferrer" onClick={handleClick}>
     <MessageCircle size={18} /> {children} <ArrowRight size={17} />
   </a>;
 }
@@ -533,8 +541,8 @@ function App() {
   const submitEnquiry = (e) => {
     e.preventDefault();
     const message = encodeURIComponent(`${language === 'hi' ? 'नमस्ते Vinod Painter Service!' : 'Hello Vinod Painter Service!'}\n${language === 'hi' ? 'नाम' : 'Name'}: ${form.name}\n${language === 'hi' ? 'मोबाइल नंबर' : 'Phone'}: ${form.phone}\n${language === 'hi' ? 'काम' : 'Service'}: ${form.service}\n${language === 'hi' ? 'जानकारी' : 'Details'}: ${form.details || (language === 'hi' ? 'कृपया मुझसे संपर्क करें।' : 'Please contact me to discuss.')}`);
-    if (whatsappNumber && whatsappNumber !== '91XXXXXXXXXX') {
-      window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank', 'noopener,noreferrer');
+    if (hasWhatsAppNumber) {
+      window.location.assign(`https://wa.me/${whatsappNumber}?text=${message}`);
       setSent(true);
     } else {
       setSent(true);
@@ -707,8 +715,8 @@ function App() {
               <label>{t.phone}<input required type="tel" pattern="[0-9+() -]{8,18}" value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} placeholder={t.phonePlaceholder} /></label>
               <label>{t.need}<span className="select-wrap"><select value={form.service} onChange={e => setForm({ ...form, service: e.target.value })}><option value="House painting">{language === "hi" ? "घर की पेंटिंग" : "House painting"}</option><option value="Interior painting">{language === "hi" ? "घर के अंदर पेंटिंग" : "Interior painting"}</option><option value="Exterior painting">{language === "hi" ? "घर के बाहर पेंटिंग" : "Exterior painting"}</option><option value="Art / decorative painting">{language === "hi" ? "आर्ट / सजावटी पेंटिंग" : "Art / decorative painting"}</option><option value="Colour consultation">{language === "hi" ? "रंग चुनने में मदद" : "Colour consultation"}</option><option value="Other">{language === "hi" ? "अन्य" : "Other"}</option></select><ChevronDown size={16} /></span></label>
               <label>{t.projectDetails}<textarea rows="3" value={form.details} onChange={e => setForm({ ...form, details: e.target.value })} placeholder={t.detailPlaceholder} /></label>
-              <button type="submit" className="button button-primary form-submit"><Send size={17} /> {whatsappNumber && whatsappNumber !== '91XXXXXXXXXX' ? t.send : t.prepare} <ArrowRight size={17} /></button>
-              {sent && <p className="form-feedback" role="status">{whatsappNumber && whatsappNumber !== '91XXXXXXXXXX' ? t.successLive : t.successSetup}</p>}
+              <button type="submit" className="button button-primary form-submit"><Send size={17} /> {hasWhatsAppNumber ? t.send : t.prepare} <ArrowRight size={17} /></button>
+              {sent && <p className="form-feedback" role="status">{hasWhatsAppNumber ? t.successLive : t.successSetup}</p>}
               <small className="privacy-note"><ShieldCheck size={13} /> {t.privacy}</small>
             </form>
           </div>
@@ -723,7 +731,7 @@ function App() {
         </div>
         <div className="container footer-bottom"><span>© {new Date().getFullYear()} Vinod Painter Service. {t.rights}</span><span>Barira · Terhagachh · Kishanganj, Bihar</span></div>
       </footer>
-      <a className="floating-whatsapp" href={waLink(t.defaultMessage)} target={whatsappNumber && whatsappNumber !== '91XXXXXXXXXX' ? '_blank' : undefined} rel="noreferrer" aria-label={language === "hi" ? "WhatsApp पर संपर्क करें" : "Contact Vinod Painter Service on WhatsApp"}><MessageCircle size={20} aria-hidden="true" /></a>
+      <a className="floating-whatsapp" href={waLink(t.defaultMessage)} target={hasWhatsAppNumber ? '_blank' : undefined} rel="noreferrer" aria-label={language === "hi" ? "WhatsApp पर संपर्क करें" : "Contact Vinod Painter Service on WhatsApp"} onClick={(event) => { if (!hasWhatsAppNumber) { event.preventDefault(); window.alert(language === 'hi' ? 'WhatsApp नंबर अभी उपलब्ध नहीं है। कृपया नीचे दिए गए enquiry form का उपयोग करें।' : 'The WhatsApp number is not configured yet. Please use the enquiry form below.'); } }}><MessageCircle size={20} aria-hidden="true" /></a>
       {selectedProject !== null && <div className="lightbox" ref={lightboxRef} role="dialog" aria-modal="true" aria-label={t.projectTitles[selectedProject]} onClick={() => setSelectedProject(null)}>
         <button type="button" className="lightbox-close" onClick={() => setSelectedProject(null)} aria-label={language === 'hi' ? 'बंद करें' : 'Close image'}><X size={22} /></button>
         <button type="button" className="lightbox-control lightbox-previous" onClick={(event) => { event.stopPropagation(); showPreviousProject(); }} aria-label={language === 'hi' ? 'पिछली तस्वीर' : 'Previous image'}><ArrowLeft size={22} aria-hidden="true" /></button>
