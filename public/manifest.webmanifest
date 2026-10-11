@@ -1,0 +1,21 @@
+{
+  "name": "Vinod Painter Service",
+  "short_name": "Vinod Painter",
+  "description": "House painting, wall finishes and artistic painting in Barira, Terhagachh and Kishanganj, Bihar.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f4f3ed",
+  "theme_color": "#173d31",
+  "lang": "hi",
+  "categories": ["business", "lifestyle"],
+  "icons": [
+    {
+      "src": "/pwa-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

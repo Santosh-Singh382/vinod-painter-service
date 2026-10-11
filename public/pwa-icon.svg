@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title>Vinod Painter Service</title>
+  <rect width="512" height="512" rx="112" fill="#173d31"/>
+  <circle cx="256" cy="256" r="166" fill="#d7ef70" opacity=".12"/>
+  <path d="M137 344 302 179l50 50-165 165h-50z" fill="#d7ef70"/>
+  <path d="m295 172 32-32 58 58-32 32z" fill="#f7f6f1"/>
+  <path d="M120 404h272" stroke="#f7f6f1" stroke-width="24" stroke-linecap="round" opacity=".86"/>
+</svg>
