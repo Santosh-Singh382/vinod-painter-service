@@ -10,7 +10,7 @@ A premium, responsive React + Vite website for Vinod Painter Service, serving Ba
 - Enquiry form with WhatsApp handoff
 - Floating WhatsApp contact shortcut
 - Mobile navigation, accessible form labels, reduced-motion support
-- SEO title and meta description
+- SEO metadata, canonical URL, sitemap, robots.txt, and HousePainter structured data
 
 ## Requirements
 - Node.js 18+ (Node.js 20+ recommended)
@@ -52,12 +52,22 @@ The production site is generated in `dist/`.
 ## Deploy
 You can deploy the project to Vercel, Netlify, or any static host that supports Vite. Use `npm run build` as the build command and `dist` as the output directory. Add the same environment variables in the hosting dashboard before deploying.
 
+## Google Search Console
+After deploying the site at `https://vinod-painter-service.vercel.app/`:
+
+1. Open [Google Search Console](https://search.google.com/search-console/) and add the Vercel URL-prefix property.
+2. Complete ownership verification. The current HTML verification token is in `index.html`; replace it only if Search Console provides a different token.
+3. In **Sitemaps**, submit `https://vinod-painter-service.vercel.app/sitemap.xml`.
+4. Use **URL inspection** for `https://vinod-painter-service.vercel.app/` and request indexing after the deployment is publicly accessible.
+5. Check the Pages and Sitemaps reports for crawl or indexing issues over time. Indexing and rankings are controlled by Google and are not guaranteed.
+
 ## Before going live
 1. Add the correct WhatsApp/mobile number to `.env` or your host's environment settings.
 2. Replace the illustrative Unsplash gallery/hero photos with photos of actual completed jobs, with customer permission.
 3. Verify the service area wording and spelling.
 4. Test the WhatsApp enquiry flow on mobile.
-5. Deploy and share the website URL with customers.
+5. Confirm the deployed canonical URL, `robots.txt`, and `sitemap.xml` are publicly reachable.
+6. Deploy and share the website URL with customers.
 
 ## Tech stack
 React 18, Vite 6, plain CSS, Lucide React icons, Unsplash remote images, WhatsApp click-to-chat.
