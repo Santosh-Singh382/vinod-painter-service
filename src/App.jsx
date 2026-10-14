@@ -371,8 +371,8 @@ const dictionary = {
     navServices: 'Services', navWork: 'Our work', navAbout: 'About us', navContact: 'Contact',
     navQuote: 'Get a free estimate',
     eyebrow: 'YOUR LOCAL PAINTING PROFESSIONAL', heroSection: 'YOUR LOCAL PAINTING PROFESSIONAL', aboutEyebrow: 'A LOCAL NAME YOU CAN TALK TO', contactEyebrow: 'LET’S MAKE IT HAPPEN', projectTitles: ['Warm & Welcoming','Modern Home Exterior','Creative Accent Wall'], projectCats: ['Interior finish','Exterior finish','Decorative style'], projectDescs: ['A calm, contemporary living space','A clean look from the outside in','A little character goes a long way'], stamp: 'MADE WITH', stamp2: 'CARE', address: 'Bairia, Terhagachh, Kishanganj, Bihar, India',
-    hero1: 'Every wall has', hero2: 'a story. Let’s add', hero3: 'colour to yours.',
-    heroDesc: 'From a fresh coat at home to expressive artistic walls, we bring care, colour and craftsmanship to every project.',
+    hero1: 'Painter in', hero2: 'Kishanganj, Bihar', hero3: 'Vinod Painter Service',
+    heroDesc: 'Vinod Painter Service offers house painting, interior and exterior painting, decorative wall painting and colour consultation in Bairia, Terhagachh and Kishanganj, Bihar.',
     quote: 'Get a free estimate', explore: 'Explore our work',
     personal: 'Personal attention, every time', local: 'Local service · Thoughtful finishing',
     rightColour: 'THE RIGHT COLOUR', changes: 'Changes everything.',
@@ -419,8 +419,8 @@ const dictionary = {
     navServices: 'हमारी सेवाएँ', navWork: 'हमारा काम', navAbout: 'हमारे बारे में', navContact: 'संपर्क करें',
     navQuote: 'मुफ़्त अनुमान लें',
     eyebrow: 'आपकी अपनी लोकल पेंटिंग सेवा', heroSection: 'आपकी अपनी लोकल पेंटिंग सेवा', aboutEyebrow: 'आपकी अपनी लोकल पेंटिंग सेवा', contactEyebrow: 'आइए, काम शुरू करें', projectTitles: ['आरामदायक घर','घर का बाहरी रूप','दीवार का खास डिज़ाइन'], projectCats: ['घर के अंदर की फिनिशिंग','बाहरी पेंटिंग','सजावटी डिज़ाइन'], projectDescs: ['सुकून भरा आधुनिक कमरा','बाहर से सुंदर और साफ़ रूप','दीवारों में अपनी पसंद का रंग'], stamp: 'मेहनत से', stamp2: 'किया गया काम', address: 'बैरिया, टेढ़ागाछ, किशनगंज, बिहार, भारत',
-    hero1: 'हर दीवार की', hero2: 'एक कहानी है। उसमें', hero3: 'रंग भरें।',
-    heroDesc: 'घर की नई पुताई हो या दीवारों पर कलात्मक डिज़ाइन — हम हर काम ध्यान और मेहनत से करते हैं।',
+    hero1: 'किशनगंज, बिहार में', hero2: 'घर की पेंटिंग', hero3: 'Vinod Painter Service',
+    heroDesc: 'Vinod Painter Service बैरिया, टेढ़ागाछ और किशनगंज, बिहार में घर की पुताई, अंदर-बाहर की पेंटिंग और सजावटी दीवारों का काम करती है।',
     quote: 'मुफ़्त अनुमान लें', explore: 'हमारा काम देखें',
     personal: 'हर काम पर खास ध्यान', local: 'आपकी लोकल सेवा · सुंदर फिनिशिंग',
     rightColour: 'सही रंग', changes: 'सब कुछ बदल देता है।',
@@ -729,7 +729,7 @@ function App() {
           <p>{t.footerDesc}<br />{t.footerDesc2}</p>
           <a className="footer-top" href="#home">{t.top} <ArrowUp size={16} aria-hidden="true" /></a>
         </div>
-        <div className="container footer-bottom"><span>© {new Date().getFullYear()} Vinod Painter Service. {t.rights}</span><span>Barira · Terhagachh · Kishanganj, Bihar</span></div>
+        <div className="container footer-bottom"><span>© {new Date().getFullYear()} Vinod Painter Service. {t.rights}</span><span>Bairia · Terhagachh · Kishanganj, Bihar</span></div>
       </footer>
       <a className="floating-whatsapp" href={waLink(t.defaultMessage)} target={hasWhatsAppNumber ? '_blank' : undefined} rel="noreferrer" aria-label={language === "hi" ? "WhatsApp पर संपर्क करें" : "Contact Vinod Painter Service on WhatsApp"} onClick={(event) => { if (!hasWhatsAppNumber) { event.preventDefault(); window.alert(language === 'hi' ? 'WhatsApp नंबर अभी उपलब्ध नहीं है। कृपया नीचे दिए गए enquiry form का उपयोग करें।' : 'The WhatsApp number is not configured yet. Please use the enquiry form below.'); } }}><MessageCircle size={20} aria-hidden="true" /></a>
       {selectedProject !== null && <div className="lightbox" ref={lightboxRef} role="dialog" aria-modal="true" aria-label={t.projectTitles[selectedProject]} onClick={() => setSelectedProject(null)}>
